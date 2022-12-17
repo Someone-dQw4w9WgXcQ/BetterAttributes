@@ -1,5 +1,8 @@
 --!strict
 
+-- ThreadPool dependency: https://github.com/Someone-dQw4w9WgXcQ/Lua-ThreadPool
+local newThread = require(game:GetService("ReplicatedStorage"):WaitForChild("ThreadPool"))
+
 local BetterAttributes = {}
 BetterAttributes.__index = BetterAttributes
 
