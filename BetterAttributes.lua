@@ -1,7 +1,7 @@
 --!strict
 
 -- ThreadPool dependency: https://github.com/Someone-dQw4w9WgXcQ/Lua-ThreadPool
-local thread = require(game:GetService("ReplicatedStorage"):WaitForChild("ThreadPool"))
+local spawnWithReuse = require(game:GetService("ReplicatedStorage"):WaitForChild("ThreadPool"))
 
 local BetterAttributes = {}
 BetterAttributes.__index = BetterAttributes
@@ -24,7 +24,7 @@ function BetterAttributes.new(instance: Instance)
 		for listeningTo, listeners in connections do
 			if listeningTo == attribute then
 				for _, listener in listeners do
-					thread.spawn(listener, value)
+					spawnWithReuse(listener, value)
 				end
 			end
 		end
@@ -91,7 +91,7 @@ end
 function BetterAttributes:OnceEquals(attribute: string, equals: any, callback: (any) -> ())
 	local value = self.attributes[attribute]
 	if value == equals then
-		thread.spawn(callback)
+		spawnWithReuse(callback)
 	end
 
 	local listeners = self.connections[attribute]
