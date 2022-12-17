@@ -91,7 +91,7 @@ end
 function BetterAttributes:OnceEquals(attribute: string, equals: any, callback: (any) -> ())
 	local value = self.attributes[attribute]
 	if value == equals then
-		task.spawn(callback)
+		thread.spawn(callback)
 	end
 
 	local listeners = self.connections[attribute]
